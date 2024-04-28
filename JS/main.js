@@ -22,7 +22,7 @@ searchForm.addEventListener("submit", async event => {
 
 async function getPlantData(searchQuery) {
     try {
-        const apiKey = 'bFxe5hBZx4Mj6bk-MPbIvj-TVyt86x-1hGRPc2DAcyE';
+        const apiKey = 'im sorry but i still have some brain left after this';
         const proxyUrl = 'http://localhost:3000/api/proxy';
         const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
         const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(apiUrl)}`);
