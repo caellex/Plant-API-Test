@@ -22,7 +22,7 @@ weatherForm.addEventListener("submit", async event => {
 async function getPlantData(searchQuery) {
     try {
         const apiKey = 'bFxe5hBZx4Mj6bk-MPbIvj-TVyt86x-1hGRPc2DAcyE';
-        const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
+        const apiUrl = `https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
         const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error("Could not fetch data");
