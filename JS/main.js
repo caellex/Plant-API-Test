@@ -1,8 +1,9 @@
-const weatherForm = document.querySelector(".weatherForm");
-const searchInput = document.querySelector(".cityInput");
+const searchForm = document.querySelector(".plantForm");
+const searchInput = document.querySelector(".plantInput");
 const card = document.querySelector(".card");
+const rightwrapper = document.querySelector(".right-card-wrap")
 
-weatherForm.addEventListener("submit", async event => {
+searchForm.addEventListener("submit", async event => {
     event.preventDefault();
 
     const searchQuery = searchInput.value;
@@ -10,6 +11,7 @@ weatherForm.addEventListener("submit", async event => {
         try {
             const plantData = await getPlantData(searchQuery);
             displayPlantInfo(plantData);
+            console.log(plantData)
         } catch (error) {
             console.error(error);
             displayError("An error occurred while fetching data from the server");
@@ -34,7 +36,7 @@ async function getPlantData(searchQuery) {
 }
 
 function displayPlantInfo(data) {
-    card.textContent = "";
+    card.textContent = ""; // Clear previous content
     card.style.display = "flex";
 
     const { data: plants } = data;
@@ -49,32 +51,26 @@ function displayPlantInfo(data) {
         const scientificNameDisplay = document.createElement("p");
         const familyDisplay = document.createElement("p");
         const imageDisplay = document.createElement("img");
+        const rightWrap = document.createElement("div");
 
         commonNameDisplay.textContent = commonName;
         scientificNameDisplay.textContent = `Scientific Name: ${scientificName}`;
         familyDisplay.textContent = `Family: ${family}`;
         imageDisplay.src = image;
 
-        commonNameDisplay.classList.add("commonNameDisplay");
-        scientificNameDisplay.classList.add("scientificNameDisplay");
-        familyDisplay.classList.add("familyDisplay");
-        imageDisplay.classList.add("imageDisplay");
+        commonNameDisplay.classList.add("common-name-display");
+        scientificNameDisplay.classList.add("scientific-name-display");
+        familyDisplay.classList.add("family-display");
+        imageDisplay.classList.add("image-display");
+        rightWrap.classList.add("right-card-wrap");
 
-        card.appendChild(commonNameDisplay);
-        card.appendChild(scientificNameDisplay);
-        card.appendChild(familyDisplay);
+        rightWrap.appendChild(commonNameDisplay);
+        rightWrap.appendChild(scientificNameDisplay);
+        rightWrap.appendChild(familyDisplay);
         card.appendChild(imageDisplay);
+        card.appendChild(rightWrap);
     } else {
         displayError("No plant found.");
     }
 }
 
-function displayError(message) {
-    const errorDisplay = document.createElement("p");
-    errorDisplay.textContent = message;
-    errorDisplay.classList.add("errorDisplay");
-
-    card.textContent = "";
-    card.style.display = "flex";
-    card.appendChild(errorDisplay);
-}

@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(73, 73, 73);
+}
+
+.card {
+    margin-top: 2rem;
+    width: 70vh;
+    height: 250px;
+    flex-direction: row;
+}
+
+.image-display{
+animation: appear 0.4s;
+}
+.common-name-display {
+    width: 19rem;
+    color: white;
+    animation: fadeIn 0.5s;
+}
+
+.scientific-name-display {
+    animation: fadeIn 0.7s;
+    color: white;
+}
+
+.family-display {
+    animation: fadeIn 0.9s;
+    color: white;
+}
+.right-card-wrap {
+    margin-left: 1rem;
+
+}
+
+@keyframes fadeIn {
+    0%{ margin-left: -40rem; opacity: 0;}
+    50% {opacity: 0.5;}
+    100% {margin-left: 0; opacity: 1;}
+}
+
+@keyframes appear {
+    0% {scale: 0; opacity: 0;}
+    100% {scale: 1; opacity: 1;}
+
+}
