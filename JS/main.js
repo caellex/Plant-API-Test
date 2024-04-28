@@ -1,6 +1,6 @@
 const searchForm = document.querySelector(".plantForm");
 const searchInput = document.querySelector(".plantInput");
-const card = document.querySelector(".card");
+const cardDisplay = document.querySelector(".card-display");
 const rightwrapper = document.querySelector(".right-card-wrap")
 
 searchForm.addEventListener("submit", async event => {
@@ -11,7 +11,6 @@ searchForm.addEventListener("submit", async event => {
         try {
             const plantData = await getPlantData(searchQuery);
             displayPlantInfo(plantData);
-            console.log(plantData)
         } catch (error) {
             console.error(error);
             displayError("An error occurred while fetching data from the server");
@@ -24,8 +23,9 @@ searchForm.addEventListener("submit", async event => {
 async function getPlantData(searchQuery) {
     try {
         const apiKey = 'bFxe5hBZx4Mj6bk-MPbIvj-TVyt86x-1hGRPc2DAcyE';
-        const apiUrl = `https://cors-anywhere.herokuapp.com/https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
-        const response = await fetch(apiUrl);
+        const proxyUrl = 'http://localhost:3000/api/proxy';
+        const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
+        const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(apiUrl)}`);
         if (!response.ok) {
             throw new Error("Could not fetch data");
         }
@@ -35,13 +35,15 @@ async function getPlantData(searchQuery) {
     }
 }
 
-function displayPlantInfo(data) {
-    card.textContent = ""; // Clear previous content
-    card.style.display = "flex";
 
+function displayPlantInfo(data) {
+    cardDisplay.textContent = "";
     const { data: plants } = data;
+    for(i = 0; i < plants.length; i++) {
+
+    cardDisplay.style.display = "flex";
     if (plants && plants.length > 0) {
-        const plant = plants[0];
+        const plant = plants[i];
         const commonName = plant.common_name || "N/A";
         const scientificName = plant.scientific_name || "N/A";
         const family = plant.family || "N/A";
@@ -52,6 +54,7 @@ function displayPlantInfo(data) {
         const familyDisplay = document.createElement("p");
         const imageDisplay = document.createElement("img");
         const rightWrap = document.createElement("div");
+        const cardWrap = document.createElement("div");
 
         commonNameDisplay.textContent = commonName;
         scientificNameDisplay.textContent = `Scientific Name: ${scientificName}`;
@@ -63,14 +66,28 @@ function displayPlantInfo(data) {
         familyDisplay.classList.add("family-display");
         imageDisplay.classList.add("image-display");
         rightWrap.classList.add("right-card-wrap");
+        cardWrap.classList.add("card-wrap")
 
+        cardDisplay.appendChild(cardWrap)
         rightWrap.appendChild(commonNameDisplay);
         rightWrap.appendChild(scientificNameDisplay);
         rightWrap.appendChild(familyDisplay);
-        card.appendChild(imageDisplay);
-        card.appendChild(rightWrap);
+        cardWrap.appendChild(imageDisplay);
+        cardWrap.appendChild(rightWrap);
+        
     } else {
         displayError("No plant found.");
     }
+
+} 
 }
 
+function displayError(message) {
+    const errorDisplay = document.createElement("p");
+    errorDisplay.textContent = message;
+    errorDisplay.classList.add("errorDisplay");
+
+    card.textContent = "";
+    card.style.display = "flex";
+    card.appendChild(errorDisplay);
+}

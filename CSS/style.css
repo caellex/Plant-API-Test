@@ -1,16 +1,33 @@
 body {
     background-color: rgb(73, 73, 73);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card {
+height: 100%;
+width: 100%;
+}
+.card-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.card-wrap {
     margin-top: 2rem;
     width: 70vh;
     height: 250px;
-    flex-direction: row;
+    display: flex;
+    flex-direction: row; /* Reverses the direction of flex items */
+    align-items: center; /* Vertically aligns the content */
 }
 
 .image-display{
-animation: appear 0.4s;
+    height: 200px;
+    width: auto;
+    animation: appear 0.4s;
 }
 .common-name-display {
     width: 19rem;
@@ -32,7 +49,7 @@ animation: appear 0.4s;
 
 }
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
     0%{ margin-left: -40rem; opacity: 0;}
     50% {opacity: 0.5;}
     100% {margin-left: 0; opacity: 1;}
@@ -42,4 +59,4 @@ animation: appear 0.4s;
     0% {scale: 0; opacity: 0;}
     100% {scale: 1; opacity: 1;}
 
-}
+} */
