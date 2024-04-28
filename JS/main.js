@@ -22,7 +22,7 @@ searchForm.addEventListener("submit", async event => {
 
 async function getPlantData(searchQuery) {
     try {
-        const apiKey = 'im sorry but i still have some brain left after this';
+        const apiKey = 'YOUR API KEY HERE';
         const proxyUrl = 'http://localhost:3000/api/proxy';
         const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
         const response = await fetch(`${proxyUrl}?url=${encodeURIComponent(apiUrl)}`);
@@ -39,10 +39,11 @@ async function getPlantData(searchQuery) {
 function displayPlantInfo(data) {
     cardDisplay.textContent = "";
     const { data: plants } = data;
-    for(i = 0; i < plants.length; i++) {
-
     cardDisplay.style.display = "flex";
+
+ 
     if (plants && plants.length > 0) {
+        for(i = 0; i < plants.length; i++) {
         const plant = plants[i];
         const commonName = plant.common_name || "N/A";
         const scientificName = plant.scientific_name || "N/A";
@@ -74,12 +75,12 @@ function displayPlantInfo(data) {
         rightWrap.appendChild(familyDisplay);
         cardWrap.appendChild(imageDisplay);
         cardWrap.appendChild(rightWrap);
-        
+    } 
     } else {
         displayError("No plant found.");
     }
 
-} 
+
 }
 
 function displayError(message) {
@@ -87,7 +88,7 @@ function displayError(message) {
     errorDisplay.textContent = message;
     errorDisplay.classList.add("errorDisplay");
 
-    card.textContent = "";
-    card.style.display = "flex";
-    card.appendChild(errorDisplay);
+    cardDisplay.textContent = "";
+    cardDisplay.style.display = "flex";
+    cardDisplay.appendChild(errorDisplay);
 }

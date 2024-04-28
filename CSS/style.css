@@ -27,21 +27,21 @@ width: 100%;
 .image-display{
     height: 200px;
     width: auto;
-    animation: appear 0.4s;
+    animation: appear 0.9s;
 }
 .common-name-display {
     width: 19rem;
     color: white;
-    animation: fadeIn 0.5s;
+    animation: fadeIn 1s;
 }
 
 .scientific-name-display {
-    animation: fadeIn 0.7s;
+    animation: fadeIn 1.2s;
     color: white;
 }
 
 .family-display {
-    animation: fadeIn 0.9s;
+    animation: fadeIn 1.25s;
     color: white;
 }
 .right-card-wrap {
@@ -49,14 +49,13 @@ width: 100%;
 
 }
 
-/* @keyframes fadeIn {
-    0%{ margin-left: -40rem; opacity: 0;}
-    50% {opacity: 0.5;}
-    100% {margin-left: 0; opacity: 1;}
+@keyframes fadeIn {
+    0%{ margin-left: -10rem; opacity: 0;}
+    100% {margin-left: 0;}
 }
 
 @keyframes appear {
     0% {scale: 0; opacity: 0;}
     100% {scale: 1; opacity: 1;}
 
-} */
+}
