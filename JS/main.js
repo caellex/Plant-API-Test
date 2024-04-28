@@ -21,16 +21,17 @@ weatherForm.addEventListener("submit", async event => {
 
 async function getPlantData(searchQuery) {
     try {
-        const response = await fetch(`http://localhost:3000/api/plants/search?q=${searchQuery}`);
+        const apiKey = 'bFxe5hBZx4Mj6bk-MPbIvj-TVyt86x-1hGRPc2DAcyE';
+        const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
+        const response = await fetch(apiUrl);
         if (!response.ok) {
-            throw new Error("Could not fetch data from server");
+            throw new Error("Could not fetch data");
         }
         return await response.json();
     } catch (error) {
-        throw new Error("Failed to fetch data from server: " + error.message);
+        throw new Error("Failed to fetch data from Trefle API: " + error.message);
     }
 }
-
 
 function displayPlantInfo(data) {
     card.textContent = "";
@@ -47,7 +48,7 @@ function displayPlantInfo(data) {
         const commonNameDisplay = document.createElement("h1");
         const scientificNameDisplay = document.createElement("p");
         const familyDisplay = document.createElement("p");
-        const imageDisplay = document.createElement("img")
+        const imageDisplay = document.createElement("img");
 
         commonNameDisplay.textContent = commonName;
         scientificNameDisplay.textContent = `Scientific Name: ${scientificName}`;
@@ -57,12 +58,12 @@ function displayPlantInfo(data) {
         commonNameDisplay.classList.add("commonNameDisplay");
         scientificNameDisplay.classList.add("scientificNameDisplay");
         familyDisplay.classList.add("familyDisplay");
-        imageDisplay.classList.add("imageDisplay")
+        imageDisplay.classList.add("imageDisplay");
 
         card.appendChild(commonNameDisplay);
         card.appendChild(scientificNameDisplay);
         card.appendChild(familyDisplay);
-        card.appendChild(imageDisplay)
+        card.appendChild(imageDisplay);
     } else {
         displayError("No plant found.");
     }

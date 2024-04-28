@@ -12,7 +12,7 @@ app.get('/api/plants/search', async (req, res) => {
 
     try {
         const apiKey = 'bFxe5hBZx4Mj6bk-MPbIvj-TVyt86x-1hGRPc2DAcyE';
-        const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${q}`;
+        const apiUrl = `https://trefle.io/api/v1/plants/search?token=${apiKey}&q=${searchQuery}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         res.json(data);
